@@ -1,80 +1,19 @@
-import './App.css';
+import Card from "./components/Card/Card";
+import Header from "./components/Header/Header";
+import Drawer from "./components/Drawer/Drawer";
+
+const arr = [
+    { name: 'Nike Air Max 97', price: 175, imageUrl: '/img/shoes/2.jpg' },
+    { name: 'Puma Low Retro', price: 110, imageUrl: '/img/shoes/3.jpg' },
+    { name: 'Nike Air Max 270', price: 150, imageUrl: '/img/shoes/4.jpg' },
+    { name: 'Nike Pegasus 39', price: 120, imageUrl: '/img/shoes/5.jpg' }
+]
 
 function App() {
     return (
         <div className="wrapper clear">
-            <div className="overlay">
-                <div className="drawer">
-                    <h2 className='mb-30'>Cart</h2>
-
-                    <div className="items">
-                        <div className="cartItem d-flex align-center mb-20">
-                            <div
-                                style={{ backgroundImage: 'url(/img/shoes/1.jpg' }}
-                                className='cartItemImg'>
-
-                            </div>
-
-
-                            <div className='mr-20 flex'>
-                                <p className='mb-5'>Nike VapourMax 270</p>
-                                <b>249$</b>
-                            </div>
-                            <img className='removeBtn' src="/img/btn-remove.svg" alt="remove" />
-                        </div>
-
-                        <div className="cartItem d-flex align-center mb-20">
-                            <div
-                                style={{ backgroundImage: 'url(/img/shoes/4.jpg' }}
-                                className='cartItemImg'>
-
-                            </div>
-
-
-                            <div className='mr-20 flex'>
-                                <p className='mb-5'>Nike VapourMax 270</p>
-                                <b>249$</b>
-                            </div>
-                            <img className='removeBtn' src="/img/btn-remove.svg" alt="remove" />
-                        </div>
-                    </div>
-
-                    <ul className='cardTotalBlock'>
-                        <li className='d-flex'>
-                            <span>Summary: </span>
-                            <div></div>
-                            <b>754$</b>
-                        </li>
-                        <li className='d-flex'>
-                            <span>TAX 23%</span>
-                            <div></div>
-                            <b> 38$</b>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-
-
-            <header className='d-flex justify-between align-center p-40'>
-                <div className='d-flex align-center'>
-                    <img width={40} height={40} src="/img/logo.png" alt="logo" />
-                    <div>
-                        <h3 className='text-uppercase'>React sneacers</h3>
-                        <p className='opacity-5'>The best shoes shop</p>
-                    </div>
-                </div>
-
-                <ul className='d-flex'>
-                    <li className='mr-30'>
-                        <img width={18} height={18} src="/img/cart.svg" alt="cart" />
-                        <span>99 $</span>
-                    </li>
-                    <li>
-                        <img width={18} height={18} src="/img/profile.svg" alt="user" />
-                    </li>
-                </ul>
-            </header>
+            <Drawer />
+            <Header />
 
             <div className="content p-40">
                 <div className='d-flex align-center justify-between mb-40'>
@@ -86,89 +25,17 @@ function App() {
                 </div>
 
                 <div className="d-flex">
-                    <div className="cart">
-                        <div className='favorite'>
-                            <img src="/img/heart.svg" alt="Unliked" />
-                        </div>
-                        <img width={133} height={112} src="/img/shoes/1.jpg" />
-                        <h5>Nike AirMax 435</h5>
-                        <div className='d-flex justify-between align-center'>
-                            <div className='d-flex flex-column'>
-                                <span>Price:</span>
-                                <b> 299 $</b>
-                            </div>
-                        </div>
+                    {arr.map((obj) =>
+                        <Card
+                            title={obj.name}
+                            price={obj.price}
+                            imageUrl={obj.imageUrl}
+                            onClick={()=>console.log("fsdf")} />
 
-                        <button className='button'>
-                            <img width={11} height={11} src="/img/btn-plus.svg" alt="+" />
-
-                        </button>
-                    </div>
-
-
-
-                    <div className="cart">
-                        <img width={133} height={112} src="/img/shoes/2.jpg" />
-                        <h5>Nike AirMax 435</h5>
-                        <div className='d-flex justify-between align-center'>
-                            <div className='d-flex flex-column'>
-                                <span>Price:</span>
-                                <b> 299 $</b>
-                            </div>
-                        </div>
-
-                        <button className='button'>
-                            <img width={11} height={11} src="/img/btn-plus.svg" alt="+" />
-
-                        </button>
-                    </div>
-
-
-
-                    <div className="cart">
-                        <img width={133} height={112} src="/img/shoes/3.jpg" />
-                        <h5>Nike AirMax 435</h5>
-                        <div className='d-flex justify-between align-center'>
-                            <div className='d-flex flex-column'>
-                                <span>Price:</span>
-                                <b> 299 $</b>
-                            </div>
-                        </div>
-
-                        <button className='button'>
-                            <img width={11} height={11} src="/img/btn-plus.svg" alt="+" />
-
-                        </button>
-                    </div>
-
-
-
-                    <div className="cart">
-                        <img width={133} height={112} src="/img/shoes/4.jpg" />
-                        <h5>Nike AirMax 435</h5>
-                        <div className='d-flex justify-between align-center'>
-                            <div className='d-flex flex-column'>
-                                <span>Price:</span>
-                                <b> 299 $</b>
-                            </div>
-                        </div>
-
-                        <button className='button'>
-                            <img width={11} height={11} src="/img/btn-plus.svg" alt="+" />
-
-                        </button>
-                    </div>
-
+                    )}
                 </div>
-
-
-
-
-
-
             </div>
         </div>
-
     );
 }
 
