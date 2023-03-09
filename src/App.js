@@ -1,19 +1,32 @@
+import React from "react";
 import Card from "./components/Card/Card";
 import Header from "./components/Header/Header";
 import Drawer from "./components/Drawer/Drawer";
 
-const arr = [
-    { name: 'Nike Air Max 97', price: 175, imageUrl: '/img/shoes/2.jpg' },
-    { name: 'Puma Low Retro', price: 110, imageUrl: '/img/shoes/3.jpg' },
-    { name: 'Nike Air Max 270', price: 150, imageUrl: '/img/shoes/4.jpg' },
-    { name: 'Nike Pegasus 39', price: 120, imageUrl: '/img/shoes/5.jpg' }
-]
-
 function App() {
+    const [items, setItems] = React.useState([]);
+    const [cartItems, setCartItems] = React.useState([]);
+    const [cartOpened, setCartOpened] = React.useState(false);
+
+    React.useEffect(() => {
+        fetch('https://6409ecabd16b1f3ed6e14668.mockapi.io/items')
+            .then((res) => {
+                return res.json();
+            })
+            .then((json) => {
+                setItems(json);
+            });
+    }, []);
+
+    const onAddToCart = (obj) =>{
+        setCartItems([...cartItems, obj])
+    }
+    
     return (
         <div className="wrapper clear">
-            <Drawer />
-            <Header />
+            {cartOpened && <Drawer items = {cartItems} onClose={() => setCartOpened(false)} />}
+
+            <Header onClickCart={() => setCartOpened(true)} />
 
             <div className="content p-40">
                 <div className='d-flex align-center justify-between mb-40'>
@@ -24,13 +37,14 @@ function App() {
                     </div>
                 </div>
 
-                <div className="d-flex">
-                    {arr.map((obj) =>
+                <div className="d-flex flex-wrap">
+                    {items.map((item) =>
                         <Card
-                            title={obj.name}
-                            price={obj.price}
-                            imageUrl={obj.imageUrl}
-                            onClick={()=>console.log("fsdf")} />
+                            title={item.name}
+                            price={item.price}
+                            imageUrl={item.imageUrl}
+                            onFavorite={() => console.log('favorite')}
+                            onPlus={(obj)=> onAddToCart(obj)} />
 
                     )}
                 </div>
